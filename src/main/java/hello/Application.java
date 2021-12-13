@@ -169,7 +169,7 @@ public class Application {
     PlayerState myState = arenaUpdate.arena.state.get(myHref);
     if (myState.x <= 0 && !"E".equals(myState.direction)) {
         return "R";
-    }
+    }  
     if (myState.x >= (arenaUpdate.arena.dims.get(0) - 1) && !"W".equals(myState.direction)) {
         return "R";
     }
@@ -178,6 +178,10 @@ public class Application {
     }
     if (myState.y >= (arenaUpdate.arena.dims.get(1) - 1) && !"N".equals(myState.direction)) {
         return "R";
+    }
+
+    if ( (myState.x <= 0) || (myState.x >= (arenaUpdate.arena.dims.get(0) - 1)) || (myState.y <= 0 ) || (myState.y >= (arenaUpdate.arena.dims.get(1) - 1))) {
+        return "F";
     }
     for (PlayerState other : arenaUpdate.arena.state.values()) {
         Relation relation = new Relation(myState, other);
@@ -192,9 +196,6 @@ public class Application {
 
     }
     
-    if (myState.x <= 0 && !"E".equals(myState.direction)) {
-        return "R";
-    }
     int rand = new Random().nextInt() % 100;
     if (rand < 80) {
         return "F";
