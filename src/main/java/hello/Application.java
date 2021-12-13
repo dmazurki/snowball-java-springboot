@@ -170,13 +170,13 @@ public class Application {
     if (myState.x <= 0 && !"E".equals(myState.direction)) {
         return "R";
     }
-    if (myState.x >= arenaUpdate.arena.dims.get(0) && !"W".equals(myState.direction)) {
+    if (myState.x >= (arenaUpdate.arena.dims.get(0) - 1) && !"W".equals(myState.direction)) {
         return "R";
     }
     if (myState.y <= 0 && !"S".equals(myState.direction)) {
         return "R";
     }
-    if (myState.y > arenaUpdate.arena.dims.get(1) && !"N".equals(myState.direction)) {
+    if (myState.y >= (arenaUpdate.arena.dims.get(1) - 1) && !"N".equals(myState.direction)) {
         return "R";
     }
     for (PlayerState other : arenaUpdate.arena.state.values()) {
