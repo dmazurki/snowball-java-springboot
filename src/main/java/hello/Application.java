@@ -143,13 +143,14 @@ public class Application {
     }
     
     int rand = new Random().nextInt() % 100;
-    if (rand < 80) {
-        return "F";
-    } else if (rand < 90) {
+    if (rand < 70) {
+        return "T";
+    } else if (rand < 80) {
         return "L";
-    } else {
+    } else if (rand < 90){
         return "R";
-    }
+    } 
+    return "F";
   }
 
   
