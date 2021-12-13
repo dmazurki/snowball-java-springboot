@@ -100,19 +100,6 @@ public class Application {
   public String index(@RequestBody ArenaUpdate arenaUpdate) {
     String myHref = arenaUpdate._links.self.href;
     PlayerState myState = arenaUpdate.arena.state.get(myHref);
-
-    for (PlayerState other : arenaUpdate.arena.state.values()) {
-        Relation relation = new Relation(myState, other);
-        if (relation.shootRisk) {
-            Direction myDir = Direction.valueOf(myState.direction);
-            if (myDir == relation.myExpectedDirection) {
-                return "T";
-            } 
-            return "F";
-
-        }
-
-    }
     if (myState.x <= 0 && !"E".equals(myState.direction)) {
         return "R";
     }
@@ -125,6 +112,19 @@ public class Application {
     if (myState.y > arenaUpdate.arena.dims.get(1) && !"N".equals(myState.direction)) {
         return "R";
     }
+    for (PlayerState other : arenaUpdate.arena.state.values()) {
+        Relation relation = new Relation(myState, other);
+        if (relation.shootRisk) {
+            Direction myDir = Direction.valueOf(myState.direction);
+            if (myDir == relation.myExpectedDirection) {
+                return "T";
+            } 
+            return "F";
+
+        }
+
+    }
+    
     if (myState.x <= 0 && !"E".equals(myState.direction)) {
         return "R";
     }
