@@ -107,11 +107,19 @@ public class Application {
             if ((Direction.valueOf(myState.direction) == Direction.valueOf(other.direction).getOpposite())) {
                 return "R";
             } 
-            return "F";
+            return "T";
 
         }
+
     }
-    return "T";
+    int rand = new Random().nextInt() % 100;
+    if (rand < 80) {
+        return "F";
+    } else if (rand < 90) {
+        return "L";
+    } else {
+        return "R";
+    }
   }
 
   
