@@ -62,7 +62,7 @@ public class Application {
     }
 
     private Direction getExpectedDirection() {
-
+        return null;
     }
 
   }
