@@ -132,12 +132,15 @@ public class Application {
     for (PlayerState other : arenaUpdate.arena.state.values()) {
         Relation relation = new Relation(myState, other);
         if (relation.shootRisk) {
-            Direction myDir = Direction.valueOf(myState.direction);
-            if (myDir == relation.myExpectedDirection) {
+            int rand = new Random().nextInt() % 100;
+            if (rand < 70) {
                 return "T";
-            } 
+            } else if (rand < 80) {
+            return "L";
+            } else if (rand < 90){
+            return "R";
+             } 
             return "F";
-
         }
 
     }
