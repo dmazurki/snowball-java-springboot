@@ -104,10 +104,11 @@ public class Application {
     for (PlayerState other : arenaUpdate.arena.state.values()) {
         Relation relation = new Relation(myState, other);
         if (relation.shootRisk) {
-            if ((Direction.valueOf(myState.direction) == Direction.valueOf(other.direction).getOpposite())) {
-                return "R";
+            Direction myDir = Direction.valueOf(myState.direction);
+            if (myDir == relation.myExpectedDirection) {
+                return "T";
             } 
-            return "T";
+            return "F";
 
         }
 
