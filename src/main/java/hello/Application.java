@@ -78,8 +78,8 @@ public class Application {
          opponentExpectedDirection = myExpectedDirection.getOpposite();
 
 
-         Direction opponentDirection  = Direction.valueOf(other.direction);
-         if (opponentDirection == opponentExpectedDirection 
+         Direction myDirection  = Direction.valueOf(me.direction);
+         if (myExpectedDirection == myDirection 
          && ((distanceVertical < 4 && distanceHorizontal == 0) || (distanceHorizontal < 4 && distanceVertical == 0))) {
             shootRisk = true;
          }
