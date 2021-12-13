@@ -79,8 +79,7 @@ public class Application {
 
 
          Direction myDirection  = Direction.valueOf(me.direction);
-         if (myExpectedDirection == myDirection 
-         && ((distanceVertical < 4 && distanceHorizontal == 0) || (distanceHorizontal < 4 && distanceVertical == 0))) {
+         if ((distanceVertical < 4 && distanceHorizontal == 0) || (distanceHorizontal < 4 && distanceVertical == 0)) {
             shootRisk = true;
          }
     }
@@ -111,6 +110,7 @@ public class Application {
 
   @PostMapping("/**")
   public String index(@RequestBody ArenaUpdate arenaUpdate) {
+    int rand = new Random().nextInt() % 100;
     String myHref = arenaUpdate._links.self.href;
     PlayerState myState = arenaUpdate.arena.state.get(myHref);
     if (myState.x <= 0 && !"E".equals(myState.direction)) {
@@ -129,23 +129,24 @@ public class Application {
     if ( (myState.x <= 0) || (myState.x >= (arenaUpdate.arena.dims.get(0) - 1)) || (myState.y <= 0 ) || (myState.y >= (arenaUpdate.arena.dims.get(1) - 1))) {
         return "F";
     }
+
     for (PlayerState other : arenaUpdate.arena.state.values()) {
         Relation relation = new Relation(myState, other);
         if (relation.shootRisk) {
-            int rand = new Random().nextInt() % 100;
-            if (rand < 70) {
-                return "T";
-            } else if (rand < 80) {
-            return "L";
-            } else if (rand < 90){
-            return "R";
-             } 
+            if (relation.myExpectedDirection ==  Direction.valueOf(myState.direction)) {
+                if (rand < 70) {
+                    return "T";
+                } else {
+                    return "L";
+                }
+            }
+            if (rand < 80) {
+                return "L";
+            } 
             return "F";
         }
 
     }
-    
-    int rand = new Random().nextInt() % 100;
     if (rand < 70) {
         return "T";
     } else if (rand < 80) {
