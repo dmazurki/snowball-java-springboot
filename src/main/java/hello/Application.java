@@ -113,6 +113,21 @@ public class Application {
         }
 
     }
+    if (myState.x <= 0 && !"E".equals(myState.direction)) {
+        return "R";
+    }
+    if (myState.x >= arenaUpdate.arena.dims.get(0) && !"W".equals(myState.direction)) {
+        return "R";
+    }
+    if (myState.y <= 0 && !"S".equals(myState.direction)) {
+        return "R";
+    }
+    if (myState.y > arenaUpdate.arena.dims.get(1) && !"N".equals(myState.direction)) {
+        return "R";
+    }
+    if (myState.x <= 0 && !"E".equals(myState.direction)) {
+        return "R";
+    }
     int rand = new Random().nextInt() % 100;
     if (rand < 80) {
         return "F";
